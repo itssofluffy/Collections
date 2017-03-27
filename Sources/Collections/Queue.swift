@@ -66,6 +66,10 @@ public struct Queue<T>: SequentialCollection {
     public func peek() -> T? {
         return (isEmpty) ? nil : _elements[_head]
     }
+
+    public mutating func removeAll(keepingCapacity keep: Bool = false) {
+        _elements.removeAll(keepingCapacity:keep)
+    }
 }
 
 public func ==<T: Equatable>(lhs: Queue<T>, rhs: Queue<T>) -> Bool {

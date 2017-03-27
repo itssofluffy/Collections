@@ -92,7 +92,7 @@ public struct PriorityQueue<T: Equatable>: SequentialCollection {
     ///
     /// - Parameters:
     ///   - keepCapacity:
-    public mutating func removeAll(keepingCapacity keep: Bool = false)  {
+    public mutating func removeAll(keepingCapacity keep: Bool = false) {
         _heap.removeAll(keepingCapacity: keep)
     }
 }

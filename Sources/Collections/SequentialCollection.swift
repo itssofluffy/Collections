@@ -31,6 +31,7 @@ public protocol SequentialCollection: Sequence {
     mutating func push(_ element: T)
     mutating func pop() -> T?
     func peek() -> T?
+    mutating func removeAll(keepingCapacity keep: Bool)
 }
 
 extension SequentialCollection {

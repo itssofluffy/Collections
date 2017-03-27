@@ -46,20 +46,14 @@ public struct Stack<T>: SequentialCollection {
     public func peek() -> T? {
         return _elements.last
     }
+
+    public mutating func removeAll(keepingCapacity keep: Bool = false) {
+        _elements.removeAll(keepingCapacity:keep)
+    }
 }
 
 public func ==<T: Equatable>(lhs: Stack<T>, rhs: Stack<T>) -> Bool {
-    if (lhs._elements.count != rhs._elements.count) {
-        return false
-    }
-
-    for index in 0 ..< lhs.count {
-        if (lhs._elements[index] != rhs._elements[index]) {
-            return false
-        }
-    }
-
-    return true
+    return (lhs._elements == rhs._elements)
 }
 
 public func !=<T: Equatable>(lhs: Stack<T>, rhs: Stack<T>) -> Bool {

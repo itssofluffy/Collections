@@ -141,7 +141,7 @@ extension MultiSet: Sequence {
     public func makeIterator() -> AnyIterator<T> {
         var keyValueGenerator = _members.makeIterator()
         var elementCount = 0
-        var element : T? = nil
+        var element: T? = nil
 
         return AnyIterator {
             if (elementCount > 0) {

@@ -197,12 +197,11 @@ extension MultiMap: CustomStringConvertible {
     /// A string containing a suitable textual
     /// representation of the multimap.
     public var description: String {
-        return "[" + map { "\($0.0): \($0.1)" }.joined(separator: ", ") + "]"
+        return "[" + map { "\($0.0):\($0.1)" }.joined(separator: ", ") + "]"
     }
 }
 
 extension MultiMap: Equatable {
-    /// Returns `true` if and only if the multimaps contain the same key-value pairs.
     public static func ==<Key, Value>(lhs: MultiMap<Key, Value>, rhs: MultiMap<Key, Value>) -> Bool {
         if (lhs.count != rhs.count || lhs.keyCount != rhs.keyCount) {
             return false
