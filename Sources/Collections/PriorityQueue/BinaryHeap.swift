@@ -21,7 +21,7 @@
 */
 
 // Max Heap
-internal struct BinaryHeap<T: Equatable> {
+internal struct BinaryHeap<T: Equatable>: SequentialCollection {
     // returns true if the first argument has the highest priority
     fileprivate var _isOrderedBefore: (T, T) -> Bool = { _, _ in return false }
     fileprivate var _items = Array<T>()
@@ -34,10 +34,6 @@ internal struct BinaryHeap<T: Equatable> {
 
     internal var count: Int {
         return _items.count
-    }
-
-    internal var isEmpty: Bool {
-        return _items.isEmpty
     }
 
     internal mutating func push(_ element: T) {

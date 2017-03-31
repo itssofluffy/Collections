@@ -69,7 +69,7 @@ extension MultiSet {
 
     /// Returns `true` if the multiset contains the given element.
     public func contains(_ element: T) -> Bool {
-        return _members[element] != nil
+        return (_members[element] != nil)
     }
 
     /// Returns the number of occurrences  of an element in the multiset.
@@ -77,13 +77,8 @@ extension MultiSet {
         return _members[element] ?? 0
     }
 
-    /// Inserts a single occurrence of an element into the multiset.
-    public mutating func insert(_ element: T) throws {
-        try insert(element, occurrences: 1)
-    }
-
     /// Inserts a number of occurrences of an element into the multiset.
-    public mutating func insert(_ element: T, occurrences: Int) throws {
+    public mutating func insert(_ element: T, occurrences: Int = 1) throws {
         guard (occurrences >= 1) else {
             throw MultiSetError.NumberOfOccurrences
         }
@@ -93,15 +88,10 @@ extension MultiSet {
         count += occurrences
     }
 
-    /// Removes a single occurrence of an element from the multiset, if present.
-    public mutating func remove(_ element: T) throws {
-        return try remove(element, occurrences: 1)
-    }
-
     /// Removes a number of occurrences of an element from the multiset.
     /// If the multiset contains fewer than this number of occurrences to begin with,
     /// all occurrences will be removed.
-    public mutating func remove(_ element: T, occurrences: Int) throws {
+    public mutating func remove(_ element: T, occurrences: Int = 1) throws {
         guard (occurrences >= 1) else {
             throw MultiSetError.NumberOfOccurrences
         }
@@ -170,19 +160,18 @@ extension MultiSet: CustomStringConvertible {
 }
 
 extension MultiSet: Hashable {
-    /// The hash value.
-    /// `x == y` implies `x.hashValue == y.hashValue`
+    /// create a has so that multiset a == multiset b
     public var hashValue: Int {
-        var result = 3
+        var hash = 3
 
-        result = (31 ^ result) ^ distinctCount
-        result = (31 ^ result) ^ count
+        hash = (31 ^ hash) ^ distinctCount
+        hash = (31 ^ hash) ^ count
 
         for element in self {
-            result = (31 ^ result) ^ element.hashValue
+            hash = (31 ^ hash) ^ element.hashValue
         }
 
-        return result
+        return hash
     }
 }
 

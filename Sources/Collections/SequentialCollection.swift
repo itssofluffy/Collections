@@ -20,7 +20,7 @@
     IN THE SOFTWARE.
 */
 
-public protocol SequentialCollection: Sequence {
+protocol SequentialCollection: Sequence {
     associatedtype T
 
     var isEmpty: Bool { get }

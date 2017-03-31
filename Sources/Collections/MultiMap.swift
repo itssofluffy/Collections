@@ -70,7 +70,10 @@ extension MultiMap {
     /// A sequence containing the multimap's values.
     public var values: AnySequence<Value> {
         let selfIterator = makeIterator()
-        let valueIterator = AnyIterator { selfIterator.next()?.1 }
+
+        let valueIterator = AnyIterator {
+            selfIterator.next()?.1
+        }
 
         return AnySequence(valueIterator)
     }
