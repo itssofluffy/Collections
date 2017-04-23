@@ -53,7 +53,7 @@ public struct Matrix<T> {
 
     /// Constructs a new matrix using a 1D array in row-major order.
     ///
-    /// `Matrix[i,j] == grid[i*columns + j]`
+    /// `Matrix[i, j] == grid[i * columns + j]`
     public init(rows: Int, columns: Int, grid: Array<T>) throws {
         guard (rows * columns == grid.count) else {
             throw MatrixError.Grid(rows: rows, columns: columns, gridCount: grid.count)

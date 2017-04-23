@@ -20,7 +20,7 @@
     IN THE SOFTWARE.
 */
 
-public class TreeNode<T> {
+public class TreeNode<T: Equatable> {
     private var _value: T?
     public var value: T {
         return _value!
@@ -51,9 +51,7 @@ public class TreeNode<T> {
         children.append(node)
         node.parent = self
     }
-}
 
-extension TreeNode where T: Equatable {
     public func search(for value: T) -> TreeNode? {
         if (self.value == value) {
             return self
