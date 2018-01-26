@@ -1,7 +1,7 @@
 /*
     Matrix.swift
 
-    Copyright (c) 2017 Stephen Whittle  All rights reserved.
+    Copyright (c) 2017, 2018 Stephen Whittle  All rights reserved.
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"),
@@ -99,10 +99,10 @@ public struct Matrix<T> {
 }
 
 extension Matrix: ExpressibleByArrayLiteral {
-    public typealias Element = Array<T>
+    public typealias Elements = Array<T>
 
     /// Constructs a matrix using an array literal.
-    public init(arrayLiteral elements: Element...) {
+    public init(arrayLiteral elements: Elements...) {
         try! self.init(elements)
     }
 }

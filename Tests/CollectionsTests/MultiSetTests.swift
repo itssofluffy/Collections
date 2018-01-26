@@ -1,7 +1,7 @@
 /*
     MultiSetTests.swift
 
-    Copyright (c) 2017 Stephen Whittle  All rights reserved.
+    Copyright (c) 2017, 2018 Stephen Whittle  All rights reserved.
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"),
@@ -269,7 +269,7 @@ class MultiSetTests: XCTestCase {
     }
 
 
-#if !os(OSX)
+#if os(Linux)
     static let allTests = [
         ("testEmptyMultiSet", testEmptyMultiSet),
         ("testInitWithArray", testInitWithArray),

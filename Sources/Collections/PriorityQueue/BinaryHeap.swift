@@ -1,7 +1,7 @@
 /*
     BinaryHeap.swift
 
-    Copyright (c) 2017 Stephen Whittle  All rights reserved.
+    Copyright (c) 2017, 2018 Stephen Whittle  All rights reserved.
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"),
@@ -75,7 +75,11 @@ internal struct BinaryHeap<T: Equatable>: SequentialCollection {
         var parentIndex = parent(i)
 
         while (i > 0 && !_isOrderedBefore(_items[parentIndex], _items[i])) {
+#if swift(>=3.2)
+            _items.swapAt(i, parentIndex)
+#else
             swap(&_items[i], &_items[parentIndex])
+#endif
             i = parentIndex
             parentIndex = parent(i)
         }
@@ -107,7 +111,11 @@ internal struct BinaryHeap<T: Equatable>: SequentialCollection {
         var max = maxIndex(leftChild(i), rightChild(i))
 
         while (max >= 0 && !_isOrderedBefore(_items[i], _items[max])) {
+#if swift(>=3.2)
+            _items.swapAt(max, i)
+#else
              swap(&_items[max], &_items[i])
+#endif
              i = max
              max = maxIndex(leftChild(i), rightChild(i))
         }
@@ -120,6 +128,15 @@ extension BinaryHeap: Sequence {
     }
 }
 
+#if swift(>=3.2)
+internal func ==<T>(lhs: BinaryHeap<T>, rhs: BinaryHeap<T>) -> Bool {
+    return lhs._items.sorted(by: lhs._isOrderedBefore) == rhs._items.sorted(by: rhs._isOrderedBefore)
+}
+
+internal func !=<T>(lhs: BinaryHeap<T>, rhs: BinaryHeap<T>) -> Bool {
+    return !(lhs == rhs)
+}
+#else
 internal func ==<T: Equatable>(lhs: BinaryHeap<T>, rhs: BinaryHeap<T>) -> Bool {
     return lhs._items.sorted(by: lhs._isOrderedBefore) == rhs._items.sorted(by: rhs._isOrderedBefore)
 }
@@ -127,3 +144,4 @@ internal func ==<T: Equatable>(lhs: BinaryHeap<T>, rhs: BinaryHeap<T>) -> Bool {
 internal func !=<T: Equatable>(lhs: BinaryHeap<T>, rhs: BinaryHeap<T>) -> Bool {
     return !(lhs == rhs)
 }
+#endif

@@ -1,7 +1,7 @@
 /*
     PriorityQueue.swift
 
-    Copyright (c) 2016, 2017 Stephen Whittle  All rights reserved.
+    Copyright (c) 2016, 2017, 2018 Stephen Whittle  All rights reserved.
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"),
@@ -114,6 +114,15 @@ extension PriorityQueue: CustomStringConvertible {
     }
 }
 
+#if swift(>=3.2)
+public func ==<T>(lhs: PriorityQueue<T>, rhs: PriorityQueue<T>) -> Bool {
+    return (lhs._heap == rhs._heap)
+}
+
+public func !=<T>(lhs: PriorityQueue<T>, rhs: PriorityQueue<T>) -> Bool {
+    return !(lhs == rhs)
+}
+#else
 public func ==<T: Equatable>(lhs: PriorityQueue<T>, rhs: PriorityQueue<T>) -> Bool {
     return (lhs._heap == rhs._heap)
 }
@@ -121,3 +130,4 @@ public func ==<T: Equatable>(lhs: PriorityQueue<T>, rhs: PriorityQueue<T>) -> Bo
 public func !=<T: Equatable>(lhs: PriorityQueue<T>, rhs: PriorityQueue<T>) -> Bool {
     return !(lhs == rhs)
 }
+#endif
