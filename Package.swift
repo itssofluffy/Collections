@@ -1,7 +1,7 @@
 /*
     Package.swift
 
-    Copyright (c) 2016, 2017 Stephen Whittle  All rights reserved.
+    Copyright (c) 2016, 2017, 2018 Stephen Whittle  All rights reserved.
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"),
@@ -22,24 +22,21 @@
 
 import PackageDescription
 
-let package = Package (
+#if os(Linux) || os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
+let package = Package(
     name:    "Collections",
     dependencies: [
         .Package(url: "https://github.com/itssofluffy/ISFLibrary.git", majorVersion: 0)
     ]
 )
 
-let staticLibrary = Product (
+let staticLibrary = Product(
     name:    "Collections",
     type:    .Library(.Static),
     modules: ["Collections"]
 )
 
-let dynamicLibrary = Product (
-    name:    "Collections",
-    type:    .Library(.Dynamic),
-    modules: ["Collections"]
-)
-
 products.append(staticLibrary)
-products.append(dynamicLibrary)
+#else
+fatalError("Unsupported OS")
+#endif
